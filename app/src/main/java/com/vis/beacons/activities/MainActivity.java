@@ -1,7 +1,6 @@
 package com.vis.beacons.activities;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -16,11 +15,11 @@ import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.messages.MessagesOptions;
 import com.google.android.gms.nearby.messages.NearbyPermissions;
 import com.vis.beacons.callbacks.BeaconConnectionCallback;
-import com.vis.beacons.listeners.BLEListenerService;
 import com.vis.beacons.listeners.GoogleApiClientConnectionFailedListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void createGoogleApiClient() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+                == PackageManager.PERMISSION_GRANTED && googleApiClient!=null){
             BeaconConnectionCallback beaconConnectionCallback=new BeaconConnectionCallback(this);
-            GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
+            googleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(Nearby.MESSAGES_API, new MessagesOptions.Builder()
                             .setPermissions(NearbyPermissions.BLE)
                             .build())

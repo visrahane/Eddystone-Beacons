@@ -11,7 +11,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.messages.Strategy;
 import com.google.android.gms.nearby.messages.SubscribeOptions;
+import com.vis.beacons.listeners.BeaconMessageListener;
 import com.vis.beacons.receivers.BeaconMessageReceiver;
+
+
 
 /**
  * Created by Vis on 14-07-2017.
@@ -19,8 +22,10 @@ import com.vis.beacons.receivers.BeaconMessageReceiver;
 
 public class BeaconConnectionCallback implements GoogleApiClient.ConnectionCallbacks{
 
+    private static final String TAG="";
     private GoogleApiClient googleApiClient;
     private FragmentActivity mainActivity;
+
 
     public BeaconConnectionCallback(FragmentActivity mainActivity) {
         this.mainActivity=mainActivity;
@@ -40,11 +45,11 @@ public class BeaconConnectionCallback implements GoogleApiClient.ConnectionCallb
     }
 
     private void subscribe() {
-        Log.i("", "Subscribing.");
+        Log.i(TAG, "Subscribing.");
         SubscribeOptions options = new SubscribeOptions.Builder()
                 .setStrategy(Strategy.BLE_ONLY)
                 .build();
-        Nearby.Messages.subscribe(googleApiClient, getPendingIntent(), options);
+        Nearby.Messages.subscribe(googleApiClient, new BeaconMessageListener(), options);
     }
 
     private PendingIntent getPendingIntent() {
