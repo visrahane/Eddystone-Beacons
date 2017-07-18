@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createGoogleApiClient() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED && googleApiClient!=null){
+                == PackageManager.PERMISSION_GRANTED && googleApiClient==null){
             BeaconConnectionCallback beaconConnectionCallback=new BeaconConnectionCallback(this);
             googleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(Nearby.MESSAGES_API, new MessagesOptions.Builder()

@@ -26,6 +26,7 @@
         </activity>
         <receiver android:name="com.vis.beacons.receivers.BeaconMessageReceiver"
             android:exported="true"/>
+        <service android:name="com.vis.beacons.services.BLEBackgroundScanService" />
     </application>
 
 </manifest>
