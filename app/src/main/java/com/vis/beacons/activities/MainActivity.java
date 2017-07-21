@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Starting Service", Toast.LENGTH_SHORT).show();
         createGoogleApiClient();
         //startService(new Intent(this, BLEListenerService.class));
-        //finish();
+        finish();
     }
 
     private void createGoogleApiClient() {
